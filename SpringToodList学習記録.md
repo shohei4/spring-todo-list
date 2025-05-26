@@ -6,11 +6,11 @@ logoutはSpringSecurityを使用しているとPOST送信でしか受け付け�
  →CSRF対策でSpringSecurity がPOSTのみを受け付けるようになっている
 
 認証情報の処理の流れ
-AuthenticationとUserDetails、UserDetailsServiceの役割
-　*Authentication－現在のユーザーの認証状態と認証情報を保持するオブジェクト
+* AuthenticationとUserDetails、UserDetailsServiceの役割
+　* Authentication－現在のユーザーの認証状態と認証情報を保持するオブジェクト
 　* UserDetails－Spring Securityが認証時に利用するユーザー情報の構造を定義するインターフェース
 　* UserDetailsService－ユーザー名をもとに UserDetails を取得するサービスインターフェース
-Auhenticationとprincipalの違い
+* Auhenticationとprincipalの違い
 　* auhtentication－principal(UserDetails)以外にも認証情報や状態を持っている
 　* principal－UserDetailsに関する情報のみ
 
