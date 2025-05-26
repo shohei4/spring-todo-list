@@ -15,8 +15,8 @@ logoutはSpringSecurityを使用しているとPOST送信でしか受け付け�
   * principal－UserDetailsに関する情報のみ
 
 * Modelと@ModelAttributeの違い
- * Model－ビューに値を渡すときに使用する(一覧表示など)
- * @ModelAttribute－formの値を受け取るときに使用する
+  * Model－ビューに値を渡すときに使用する(一覧表示など)
+  * @ModelAttribute－formの値を受け取るときに使用する
 
 CustomValidationアノテーションの定義
 アノテーションインターフェース
