@@ -2,8 +2,8 @@
 
 ## 自分が難しく感じたところや調べたこと
 
-* logoutはSpringSecurityを使用しているとPOST送信でしか受け付けない
- →CSRF対策でSpringSecurity がPOSTのみを受け付けるようになっている
+ logoutはSpringSecurityを使用しているとPOST送信でしか受け付けない
+   →CSRF対策でSpringSecurity がPOSTのみを受け付けるようになっている
 
 認証情報の処理の流れ
 * AuthenticationとUserDetails、UserDetailsServiceの役割
