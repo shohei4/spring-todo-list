@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{include/head.html}"></th:block>
+<body>
+	<div class="container-md">
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<h2>ログイン画面</h2>
+					</div>
+					<div class="card-body">
+						<!-- エラー表示 -->
+						<div th:if="${param.error}">
+							<p th:text="${param.message}" style="color: red;"></p>
+						</div>
+						<!-- logout表示 -->
+						<div th:if="${param.logout}">
+							<p style="color: blue;">ログアウトに成功しました</p>
+						</div>
+						<form th:action="@{/authentication}" method="post" th:object="${loginForm}">
+							<div class="mb-3">
+								<label for="InputUsername" class="form-label">Emailアドレス</label>
+								<input type="text" class="form-control" th:field="*{usernameInput}">
+							</div>
+							<div class="mb-3">
+								<label for="passwordInput">パスワード</label>
+								<input type="password" class="form-control" th:field="*{passwordInput}">
+							</div>
+							<button type="submit" class="btn btn-primary">ログイン</button>
+						</form>
+						<a th:href="@{/users/form}">ユーザー登録へ</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+</body>
+
+</html>

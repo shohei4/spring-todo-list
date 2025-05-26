@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.example.SpringTodoList.repository.UserMapper">
+	<!-- ENUM型のauthorityをセション情報から取得できるようにENUM型の変換処理を含むResultMapを記述 -->
+	<resultMap id="userResultMap"
+		type="com.example.SpringTodoList.entity.User">
+		<id property="id" column="id" />
+		<result property="username" column="username" />
+		<result property="displayname" column="displayname" />
+		<result property="password" column="password" />
+		<!-- Enum型のマッピング！ -->
+		<result property="authority" column="authority"
+			typeHandler="org.apache.ibatis.type.EnumTypeHandler" />
+		<result property="isDeleted" column="is_deleted" />
+		<result property="createdAt" column="created_at" />
+		<result property="updatedAt" column="updated_at" />
+	</resultMap>
+
+	<!-- BASE_SQL -->
+	<sql id="usersColums">
+		SELECT
+		id,
+		username,
+		password,
+		displayname,
+		authority
+		FROM
+		users
+	</sql>
+
+	<!-- ユーザー名で認証情報を検索 -->
+	<select id="selectByUsername" resultMap="userResultMap">
+
+		<include refid="usersColums" />
+
+		WHERE username = #{username}
+	</select>
+	<select id="selectAll" resultMap="userResultMap">
+
+		<include refid="usersColums" />
+
+		ORDER BY id
+	</select>
+	<select id="selectById" resultMap="userResultMap">
+
+		<include refid="usersColums" />
+
+		WHERE id = #{id}
+	</select>
+	<select id="existsByUsername" resultType="java.lang.Integer"
+		parameterType="string">
+		SELECT COUNT(*)
+		FROM users
+		WHERE username = #{username}
+	</select>
+	<insert id="insert">
+		INSERT INTO users (username, password, displayname,
+		created_at, updated_at)
+		VALUES (#{username}, #{password},
+		#{displayname},
+		CURRENT_TIMESTAMP,
+		CURRENT_TIMESTAMP);
+	</insert>
+	<update id="update">
+		UPDATE users
+		SET username =#{username},
+		password =
+		#{password},
+		displayname = #{displayname},
+		updated_at =
+		CURRENT_TIMESTAMP
+		WHERE id = #{id};
+	</update>
+	<delete id="delete">
+		DELETE FROM users WHERE id=#{id}
+	</delete>
+</mapper>

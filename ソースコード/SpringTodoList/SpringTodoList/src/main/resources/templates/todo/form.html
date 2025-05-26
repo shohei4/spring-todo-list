@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{include/head.html}"></th:block>
+
+<body>
+	<div class="container-md">
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<h2 th:text="${title}"></h2>
+					</div>
+					<div class="card-body">
+						<form
+							th:action="${todoForm.isNew} ? @{/todos/save/{userId}(userId=${#authentication.principal.id})} : @{/todos/update}"
+							th:object="${todoForm}" method="post">
+							<!-- idは更新時に必要のため、hiiddenで待つ -->
+							<input type="hidden" th:field="*{id}">
+							<div class="mb-3">
+								<label for="RegistrationDateInput" class="form-label">登録日</label>
+								<input type="date" class="form-control" th:field="*{registrationDate}">
+								<span th:if="${#fields.hasErrors('registrationDate')}" th:errors="*{registrationDate}"
+									style="color: red;"></span>
+							</div>
+							<div class="mb-3">
+								<label for="ExpirationDateInput" class="form-label">期限日</label>
+								<input type="date" class="form-control" th:field="*{expirationDate}">
+								<span th:if="${#fields.hasErrors('expirationDate')}" th:errors="*{expirationDate}"
+									style="color: red;"></span>
+							</div>
+							<div class="mb-3">
+								<label for="todoItemInput" class="form-label">todo項目</label>
+								<input type="text" class="form-control" th:field="*{todoItem}">
+								<span th:if="${#fields.hasErrors('todoItem')}" th:errors="*{todoItem}"
+									style="color: red;"></span>
+							</div>
+							<!-- 更新時のみ表示 -->
+							<div th:unless="${todoForm.isNew}">
+								<div class="mb-3 form-check">
+									<label for="isDeletedInput" class="form-check-label">削除</label>
+									<input type="checkbox" class="form-check-input" th:field="*{isDeleted}" value="1">
+								</div>
+								<div class="mb-3 form-check">
+									<label for="isFinishedInput" class="form-check-label">完了</label>
+									<input type="checkbox" class="form-check-input" th:field="*{isFinished}" />
+								</div>
+							</div>
+							<!-- ボタン条件分岐 -->
+							<button th:if=${todoForm.isNew} type="submit" class="btn btn-primary">登録</button>
+							<button th:unless="${todoForm.isNew}" type="submit" class="btn btn-primary">編集</button>
+						</form>
+						<a th:href="@{/todos}">戻る</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

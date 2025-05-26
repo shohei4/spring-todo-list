@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{include/head.html}"></th:block>
+
+<body>
+	<style>
+		tr.expired>td {
+			background-color: #ffcccc;
+		}
+	</style>
+	<div class="container-md">
+		<th:block th:replace="~{include/navbar.html}"></th:block>
+		<h2 th:text="${title}"></h2>
+		<!-- フラッシュメッセージの表示 -->
+		<p th:if="${message}" th:text="${message}" style="color:blue;">完了メッセージ</p>
+		<!-- エラーメッセージの表示 -->
+		<p th:if="${errorMessage}" th:text="${errorMessage}" style="color:red;">
+			エラーメッセージ
+		</p>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>表示名</th>
+					<th>登録日</th>
+					<th>TODO項目</th>
+					<th>期限日</th>
+					<th>完了日</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="todo : ${todos}"
+				th:class="${todo.expirationDate != null and todo.finishedDate == null and 
+				todo.expirationDate.isBefore(T(java.time.LocalDate).now())} ? 'expired'">
+					<td th:text="${todo.displayname}"></td>
+					<td th:text="${#temporals.format(todo.registrationDate, 'yyyy年MM月dd日')}"></td>
+					<td>
+						<span th:if="${todo.finishedDate != null}">
+							<s th:text="${todo.todoItem}"></s>
+						</span>
+						<span th:if="${todo.finishedDate == null}">
+							<span th:text="${todo.todoItem}"></span>
+						</span>
+					</td>
+					<td>
+						<span th:if="${todo.finishedDate != null}">
+							<s th:text="${#temporals.format(todo.expirationDate, 'yyyy年MM月dd日')}"></s>
+						</span>
+						<span th:if="${todo.finishedDate == null}">
+							<span th:text="${#temporals.format(todo.expirationDate, 'yyyy年MM月dd日')}"></span>
+						</span>
+					</td>
+					<td th:text="${#temporals.format(todo.finishedDate, 'yyyy年MM月dd日')}"></td>
+					<td><a th:href="@{/todos/edit/{id}(id=${todo.id})}">編集</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<a th:href="@{/todos/form}">新規登録</a>
+	</div>
+</body>
+
+</html>
