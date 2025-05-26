@@ -18,26 +18,25 @@ logoutはSpringSecurityを使用しているとPOST送信でしか受け付け�
   * Model－ビューに値を渡すときに使用する(一覧表示など)
   * @ModelAttribute－formの値を受け取るときに使用する
 
-CustomValidationアノテーションの定義
-アノテーションインターフェース
-@interface = アノテーションインターフェースの定義
-@Target = アノテーションをつける対象の形式を指定（クラス、メソッド、フィールド）
-@Retention() = どの段階でアノテーションがどのタイミングで保持されるかを決める
-RUNTIMEが一般的
-@Constraint() = バリデーションを実行するクラスを指定
-ConstraintValidator<> = バリデーションを実行するisValidメソッドを提供するカスタムバリデーションの実装インターフェース
-ConstraintValidatorContext クラス = バリデーションの詳細設定やエラーメッセージのカスタマイズを行いたいときに使える強力なツール
+* CustomValidationアノテーションの定義
+  * @interface = アノテーションインターフェースの定義
+  * @Target = アノテーションをつける対象の形式を指定（クラス、メソッド、フィールド）
+  * @Retention() = どの段階でアノテーションがどのタイミングで保持されるかを決める
+     RUNTIMEが一般的
+  * @Constraint() = バリデーションを実行するクラスを指定
+  * ConstraintValidator<> = バリデーションを実行するisValidメソッドを提供するカスタムバリデーションの実装インターフェース
+  * ConstraintValidatorContext クラス = バリデーションの詳細設定やエラーメッセージのカスタマイズを行いたいときに使える強力なツール
 
-MyBatisでのキーワード検索
-プレースホルダ#{key}でバインド
-CONCAT('%', #{key}, '%')で文字列結合しワイルドカードにする
+* MyBatisでのキーワード検索
+  * プレースホルダ#{key}でバインド
+  * CONCAT('%', #{key}, '%')で文字列結合しワイルドカードにする
 
-日付の扱い
-現在はDate型はLocalDate型が推奨されていて、Timestamp型はLocalDateTime型が推奨されている
+* 日付の扱い
+  * 現在はDate型はLocalDate型が推奨されていて、Timestamp型はLocalDateTime型が推奨されている
 
-アプリ設計面
-認証情報とUser情報の区分
-principalに認証情報以外も入れてもいいか
+* アプリ設計面
+  * 認証情報とUser情報の区分
+  * principalに認証情報以外も入れてもいいか
 
 
 
