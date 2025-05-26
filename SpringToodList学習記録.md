@@ -7,7 +7,7 @@ logoutはSpringSecurityを使用しているとPOST送信でしか受け付け�
 
 認証情報の処理の流れ
 * AuthenticationとUserDetails、UserDetailsServiceの役割
- * Authentication－現在のユーザーの認証状態と認証情報を保持するオブジェクト
+ ** Authentication－現在のユーザーの認証状態と認証情報を保持するオブジェクト
  * UserDetails－Spring Securityが認証時に利用するユーザー情報の構造を定義するインターフェース
  * UserDetailsService－ユーザー名をもとに UserDetails を取得するサービスインターフェース
 * Auhenticationとprincipalの違い
